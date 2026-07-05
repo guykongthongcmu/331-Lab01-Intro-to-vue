@@ -3,10 +3,12 @@ const { createApp, ref } = Vue
 createApp({
     setup(){
         const product = ref('Boots')
-        const productDescription = ref('Footwear for all terain use-cases!')
+        const image = ref('assets/images/socks_green.jpg')
+        const url = ref('https://www.camt.cmu.ac.th/en/home/')
         return {
             product,
-            productDescription
+            image,
+            url
         }
     }
 }).mount('#app')
