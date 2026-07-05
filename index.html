@@ -17,7 +17,7 @@
         <div class="product-display">
             <div class="product-container">
                 <div class="product-image">
-                    <img :src="image">
+                    <img :class="{'out-of-stock-img': !inStock}" :src="image">
                 </div>
             </div>
         </div>
@@ -28,7 +28,7 @@
             <ul>
                 <li v-for="detail in details">{{detail}}</li>
             </ul>
-            <div v-for="variant in variants" :key="variant.id" @mouseover="updateImage(variant.image)">
+            <div v-for="variant in variants" :key="variant.id" @mouseover="updateImage(variant.image)" class="color-circle" :style="{backgroundColor: variant.color}">
                 {{ variant.color}}
             </div>
             <div style="display: inline-block; margin-right: 5px;" v-for="size in sizes" :key="size.id">
@@ -36,7 +36,7 @@
             </div>
             <p v-if="onSale">Product is on sale</p>
             <p v-else>Product is not on sale</p>
-            <button class="button" @click="addToCart">Add To Cart</button>
+            <button class="button" :disabled='!inStock' @click="addToCart" :class="{disabledButton: !inStock}">Add To Cart</button>
             <button class="button" @click="updateStockStatus">Toggle Status</button>
         </div>
     </div>
