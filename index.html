@@ -13,8 +13,14 @@
 <body>
     <div id="app">
         <div class="nav-bar"></div>
-        <div class="cart">Cart({{cart}})</div>
-        <product-display :premium="premium"></product-display>
+        <div class="cart">
+            <ul>
+                <li v-for="(count, id) in cartCount" :key="id">
+                    Product {{id}} : {{count}} items
+                </li>
+            </ul>
+        </div>
+        <product-display :premium="premium" @add-to-cart="updateCart" @remove-item-from-cart="removeItemFromCart"></product-display>
     </div>
     <!-- Import Js -->
     <script src="./components/ProductDetails.js"></script>
