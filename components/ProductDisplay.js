@@ -21,6 +21,8 @@ const productDisplay = {
                 </div>
                 <button class="button" :disabled='!inStock' @click="addToCart" :class="{disabledButton: !inStock}"> Add To Cart </button>
                 <button class="button" :disabled='!inStock' @click="removeFromCart" :class="{disabledButton: !inStock}"> Remove from Cart </button>
+                <review-list :reviews="reviews"></review-list>
+                <review-form @review-submitted="addReview"></review-form>
             </div>
     </div>
 
@@ -37,6 +39,8 @@ const productDisplay = {
                 return 30
             }
         })
+
+        const reviews = ref([])
         
         const product = ref('Boots')
         const brand = ref("SE331")
@@ -74,6 +78,10 @@ const productDisplay = {
             emit('remove-item-from-cart', variants.value[selectedVariant.value].id)
         }
 
+        function addReview(review) {
+            reviews.value.push(review)
+        }
+
         const title = computed(() => {
             return brand.value + ' ' + product.value
         })
@@ -93,7 +101,9 @@ const productDisplay = {
             updateImage,
             updateVariant,
             shipping,
-            removeFromCart
+            removeFromCart,
+            addReview,
+            reviews
         }
     }
 }
